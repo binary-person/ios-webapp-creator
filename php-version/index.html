@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                text-align: center;
+            }
+            div{
+                margin: 10px;
+            }
+            .details{
+                display: inline-block;
+                width: 100px;
+            }
+            .textinput-wrappers input{
+                width: 200px;
+            }
+            input::placeholder{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to the iOS Web App Maker!</h1>
+        <h5>Another super-mini project.... by Simon Cheng</h5>
+        <form action='/generate.php' method='POST' encType='multipart/form-data'>
+            <div class='textinput-wrappers'><span class='details'>Name of app:</span><input type='text' name='name' placeholder='Some Cool App'></div>
+            <div class='textinput-wrappers'><span class='details'>Description:</span><input type='text' name='description' placeholder='This does something awesome!'></div>
+            <div class='textinput-wrappers'><span class='details'>URL:</span><input type='text' name='url' placeholder='https://example.com'></div>
+            <div class='textinput-wrappers'><span class='details'>Identifier:</span><input type='text' name='identifier' placeholder='com.company.appid'></div>
+            <div class='textinput-wrappers'><span class='details'>Icon:</span><input type='file' name='image'></div>
+            <div id='checkbox-wrapper'>
+                <input type='checkbox' name='fullscreen' id='fs'><label for='fs'>Fullscreen</label>
+                <input type='checkbox' name='removalAllowed' id='ra'><label for='ra'>Removal Allowed</label>
+            </div>
+            <input type='submit' value='Install webapp!'>
+        </form>
+    </body>
+</html>
