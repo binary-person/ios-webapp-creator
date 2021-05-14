@@ -1,40 +1,40 @@
-<htm><head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>iOS Webapp Creator</title>
-        <style>
-            body{
-                text-align: center;
-            }
+<html>
 
-            h1,h5 {
-            font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-            color:gray;
-            }
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Webapp Creator</title>
+    <style>
+        body {
+            text-align: center
+        }
 
-            div{
-                margin: 10px;
-            }
-            .details{
-                display: inline-block;
-                width: 100px;
-            }
-            .textinput-wrappers input{
-                width: 200px;
-            }
-            input::placeholder{
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="" style="
-    background: whitesmoke;
-"><div style="
-    background-color: white;
-    margin: 164px;
-    margin-top: 51px;
-    padding-bottom: 1px;
-    font-family: &quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;
-">
+        h1,
+        h5 {
+            font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            color: gray
+        }
+
+        div {
+            margin: 10px
+        }
+
+        .details {
+            display: inline-block;
+            width: 100px
+        }
+
+        .textinput-wrappers input {
+            width: 200px
+        }
+
+        input::placeholder {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="" style="background: whitesmoke;">
+    <div style=" background-color: white; margin: 164px; margin-top: 51px; padding-bottom: 1px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; ">
         <h1>Welcome to the iOS Web App Maker!</h1>
         <h5>Another super-mini project.... by Simon Cheng</h5>
         <form>
@@ -42,32 +42,13 @@
             <div class="textinput-wrappers"><span class="details">Description:</span><input type="text" name="description" placeholder="This does something awesome!"></div>
             <div class="textinput-wrappers"><span class="details">URL:</span><input type="url" name="url" placeholder="https://example.com"></div>
             <div class="textinput-wrappers"><span class="details">Identifier:</span><input type="text" name="identifier" placeholder="com.company.appid" autocorrect="off" autocapitalize="none"></div>
-            <div class="textinput-wrappers"><span class="details">Icon:</span><input type="file" name="image" style="
-    border: none;
-    border-radius: 5px;
-    background: #007AFF;
-    color: white;
-"></div>
-            <div id="checkbox-wrapper">
-                <input type="checkbox" name="fullscreen" id="fs"><label for="fs" style="
-    color: gray;
-">Fullscreen</label>
-                <input type="checkbox" name="removalAllowed" id="ra"><label for="ra" style="
-    color: gray;
-">Removal Allowed</label>
-            </div>
-            <input type="button" value="Install webapp!" onclick="main()" style="
-    border: none;
-    border-radius: 5px;
-    background: #007AFF;
-    color: white;
-">
+            <div class="textinput-wrappers"><span class="details">Icon:</span><input type="file" name="image" style=" border: none; border-radius: 5px; background: #007AFF; color: white; "></div>
+            <div id="checkbox-wrapper"> <input type="checkbox" name="fullscreen" id="fs"><label for="fs" style=" color: gray; ">Fullscreen</label> <input type="checkbox" name="removalAllowed" id="ra"><label for="ra" style=" color: gray; ">Removal Allowed</label></div> <input type="button" value="Install webapp!" onclick="main()" style=" border: none; border-radius: 5px; background: #007AFF; color: white; ">
         </form>
         <script>
             var request = new XMLHttpRequest();
             request.open('GET', 'template.plist', false);
             request.send(null);
-            
             var filePicker = document.getElementsByName('image')[0];
             var fullscreen = document.getElementsByName('fullscreen')[0];
             var appName = document.getElementsByName('name')[0];
@@ -75,70 +56,62 @@
             var identifier = document.getElementsByName('identifier')[0];
             var url = document.getElementsByName('url')[0];
             var removalAllowed = document.getElementsByName('removalAllowed')[0];
-            
-            async function isCube(dataURL){
-                return new Promise(resolve=>{
+            async function isCube(dataURL) {
+                return new Promise(resolve => {
                     var img = new Image();
-                    img.onload = function(){
+                    img.onload = function() {
                         img.width === img.height ? resolve(true) : resolve(false);
                     };
                     img.src = dataURL;
                 });
             }
-            async function getData(blob){
-                return new Promise(resolve=>{
+            async function getData(blob) {
+                return new Promise(resolve => {
                     var reader = new FileReader();
-                    reader.onload = function(){
+                    reader.onload = function() {
                         resolve(reader.result);
                     }
                     reader.readAsDataURL(blob);
                 });
             }
-            async function main(){
-                if(!filePicker.files.length){
+            async function main() {
+                if (!filePicker.files.length) {
                     alert('Please pick a file');
                     return;
                 }
-                if(!appName.value){
+                if (!appName.value) {
                     alert('Please enter a name');
                     return;
                 }
-                if(!description.value){
+                if (!description.value) {
                     alert('Please enter a description');
                     return;
                 }
-                if(!identifier.value){
+                if (!identifier.value) {
                     alert('Please enter an identifier');
                     return;
                 }
-                if(!url.value){
+                if (!url.value) {
                     alert('Please enter a URL');
                     return;
                 }
-                
-                if(filePicker.files[0].type !== 'image/png'){
+                if (filePicker.files[0].type !== 'image/png') {
                     alert('Format not allowed. Allowed format: png');
                     return;
                 }
                 var dataurl = await getData(filePicker.files[0]);
-                if(!await isCube(dataurl)){
+                if (!await isCube(dataurl)) {
                     alert('Image must be a square');
                     return;
                 }
-                var plist = request.responseText
-                .replace(/FULLSCREENBOOLEAN/g, fullscreen.checked)
-                .replace(/ICONBASE64/g, dataurl.slice(22))
-                .replace(/REMOVABLEBOOLEAN/g, removalAllowed.checked)
-                .replace(/TITLE/g, appName.value)
-                .replace(/DESCRIPTION/g, description.value)
-                .replace(/IDENTIFIER/g, identifier.value)
-                .replace(/ORGANIZATION/g, "The Cheng Organization")
-                .replace(/URLLOCATION/g, url.value)
-                .replace(/DISALLOW/g, !removalAllowed.checked);
-                
-                var plistBlob = new Blob([plist], {type: 'application/x-apple-aspen-config'});
+                var plist = request.responseText.replace(/FULLSCREENBOOLEAN/g, fullscreen.checked).replace(/ICONBASE64/g, dataurl.slice(22)).replace(/REMOVABLEBOOLEAN/g, removalAllowed.checked).replace(/TITLE/g, appName.value).replace(/DESCRIPTION/g, description.value).replace(/IDENTIFIER/g, identifier.value).replace(/ORGANIZATION/g, "The Cheng Organization").replace(/URLLOCATION/g, url.value).replace(/DISALLOW/g, !removalAllowed.checked);
+                var plistBlob = new Blob([plist], {
+                    type: 'application/x-apple-aspen-config'
+                });
                 window.location.href = window.URL.createObjectURL(plistBlob);
             }
         </script>
     </div>
-</body></html>
+</body>
+
+</html>
